@@ -1,5 +1,6 @@
 const path = require('path'),
-  webpack = require('webpack');
+  webpack = require('webpack'),
+  rimraf = require('rimraf')
 
 const webpackConfig = {
   entry: {
@@ -7,7 +8,7 @@ const webpackConfig = {
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[name].js',
+    filename: 'vue-txt-number.js',
   },
   resolve: {
     extensions: ['.vue', '.js']
@@ -38,6 +39,7 @@ const webpackConfig = {
 
 switch (process.env.NODE_ENV) {
   case 'prod':
+    rimraf(path.join(__dirname, 'dist'), () => console.log('success remove'))
     webpackConfig.entry.app = "./src/build.js"
     webpackConfig.devtool = "#source-map"
     break

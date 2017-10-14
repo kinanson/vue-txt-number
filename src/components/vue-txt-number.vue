@@ -1,15 +1,15 @@
 <template>
-  <input @keydown="keydown" @keyup.enter="$emit('enter')" @keyup="keyup" type="text" :value="value" @focus="focus">
+  <input @keydown="keydown" @keyup="keyup" type="text" :value="value" @focus="focus">
 </template>
 <script>
 export default {
-  name: 'test',
+  name: 'vueTextNumber',
   props: {
     value: {
       type: Number,
       default: 2
     },
-    allowSubtract: {
+    allowNegative: {
       type: Boolean,
       default: true
     },
@@ -30,6 +30,7 @@ export default {
       this.$el.select()
     },
     keydown (e) {
+      this._emitEvent(e)
       const newValue = e.target.value
       const keyCode = e.keyCode
       const isTextSelect = this._getSelection() > 0
@@ -48,7 +49,7 @@ export default {
 
       const _checkDash = () => {
         const keyAtStartPosition = this._getKeyIndex() === 0
-        if (this.allowSubtract && e.key === '-' && keyAtStartPosition) return true
+        if (this.allowNegative && e.key === '-' && keyAtStartPosition) return true
       }
       if (_checkDash(e)) return true
 
@@ -72,6 +73,16 @@ export default {
         if (this.decimalLength >= keyDecimal) return true
       }
       e.preventDefault()
+    },
+    _emitEvent (e) {
+      switch (e.keyCodetoLowerCase()) {
+        case 9:
+          this.$emit('tab')
+          break
+        case 13:
+          this.$emit('enter')
+          break
+      }
     },
     _getKeyIndex () {
       let el = this.$el
@@ -110,4 +121,5 @@ export default {
 }
 </script>
 <style>
+
 </style>
