@@ -8,7 +8,11 @@ const webpackConfig = {
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'vue-txt-number.js',
+    publicPath: '/dist/',
+    filename: "vue-txt-number.min.js",
+    library: 'VueTxtNumber',
+    libraryTarget: 'umd',
+    umdNamedDefine: true,
   },
   resolve: {
     extensions: ['.vue', '.js']

@@ -3,7 +3,7 @@
 </template>
 <script>
 export default {
-  name: 'vueTextNumber',
+  name: 'vueTxtNumber',
   props: {
     value: {
       type: Number,
@@ -75,7 +75,7 @@ export default {
       e.preventDefault()
     },
     _emitEvent (e) {
-      switch (e.keyCodetoLowerCase()) {
+      switch (e.keyCode) {
         case 9:
           this.$emit('tab')
           break
