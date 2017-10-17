@@ -1,6 +1,6 @@
 {
   "name": "vue-txt-number",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "This is wrapper input to only type number and limit decimal length component for vue 2",
   "main": "dist/vue-txt-number.js",
   "scripts": {
