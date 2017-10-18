@@ -1,18 +1,18 @@
 const path = require('path'),
   webpack = require('webpack'),
-  rimraf = require('rimraf')
-
+  rimraf = require('rimraf'),
+  UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+  
 const webpackConfig = {
   entry: {
-    app: './src/index.js'
+    app: path.resolve(__dirname + '/src/components/vue-txt-number.vue')
   },
   output: {
-    path: path.join(__dirname, 'dist'),
-    publicPath: '/dist/',
-    filename: "vue-txt-number.min.js",
-    library: 'VueTxtNumber',
+    path: path.resolve(__dirname+ '/dist'),
+    filename: "vue-txt-number.js",
+    library: 'vue-txt-number',
     libraryTarget: 'umd',
-    umdNamedDefine: true,
+    umdNamedDefine: true
   },
   resolve: {
     extensions: ['.vue', '.js']
@@ -23,7 +23,8 @@ const webpackConfig = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [path.join(__dirname, 'src'), path.join(__dirname, 'demo')]
+        include: [path.join(__dirname, 'src'), path.join(__dirname, 'demo')],
+        exclude: /node_modules/
       },
       {
         test: /\.css$/,

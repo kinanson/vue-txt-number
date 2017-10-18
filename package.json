@@ -1,13 +1,13 @@
 {
   "name": "vue-txt-number",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "This is wrapper input to only type number and limit decimal length component for vue 2",
   "main": "dist/vue-txt-number.js",
   "scripts": {
     "watch": "cross-env NODE_ENV=dev webpack --watch ",
     "dev": "webpack-dev-server",
     "start": "npm-run-all --parallel dev watch",
-    "build":"cross-env NODE_ENV=prod webpack -p"
+    "build": "cross-env NODE_ENV=prod webpack -p"
   },
   "repository": {
     "type": "git",
@@ -41,6 +41,7 @@
     "npm-run-all": "^4.1.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
+    "uglifyjs-webpack-plugin": "^1.0.0-beta.3",
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.3",
     "vue-template-compiler": "^2.4.4",
