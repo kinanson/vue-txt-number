@@ -68,7 +68,6 @@ export default {
         if (this.keyLength === 0 && this.decimalLength === 0) return true
         const _checkKeyInt = () => {
           let keyInt = newValue.split('.')[0].length + 1
-          console.log(keyInt, dotIndex)
           if (this.keyLength === 0) {
             keyInt = 0
             if (this._getKeyIndex() > dotIndex) return true
