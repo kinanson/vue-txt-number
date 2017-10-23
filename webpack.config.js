@@ -1,12 +1,11 @@
 const path = require('path'),
   webpack = require('webpack'),
   rimraf = require('rimraf'),
-  UglifyJSPlugin = require('uglifyjs-webpack-plugin'),
   merge = require('webpack-merge')
 
 let webpackConfig = {
   entry: {
-    app: ''
+    app: './src/index.js'
   },
   output: {
     filename: '[name].js',
@@ -44,11 +43,13 @@ rimraf(path.join(__dirname, 'dist'), () => console.log('success remove'))
 
 switch (process.env.NODE_ENV) {
   case 'dev':
-    webpackConfig.entry.app = "./src/index.js"
     module.exports = webpackConfig
     break
   case 'prod':
     webpackConfig.devtool = "#source-map"
+    webpackConfig.externals = {
+      vue: 'vue'
+    }
     module.exports = [
       merge(webpackConfig, {
         entry: './src/components/vue-txt-number.vue',

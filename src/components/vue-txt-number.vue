@@ -3,7 +3,7 @@
 </template>
 <script>
 export default {
-  name: 'vueTextNumber',
+  name: 'vueTxtNumber',
   props: {
     value: {
       type: Number,
