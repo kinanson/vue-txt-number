@@ -1,18 +1,16 @@
 const path = require('path'),
   webpack = require('webpack'),
   rimraf = require('rimraf'),
-  UglifyJSPlugin = require('uglifyjs-webpack-plugin')
-  
-const webpackConfig = {
+  UglifyJSPlugin = require('uglifyjs-webpack-plugin'),
+  merge = require('webpack-merge')
+
+let webpackConfig = {
   entry: {
-    app: path.resolve(__dirname + '/src/components/vue-txt-number.vue')
+    app: ''
   },
   output: {
-    path: path.resolve(__dirname+ '/dist'),
-    filename: "vue-txt-number.js",
-    library: 'vue-txt-number',
-    libraryTarget: 'umd',
-    umdNamedDefine: true
+    filename: '[name].js',
+    path: path.resolve(__dirname + '/dist')
   },
   resolve: {
     extensions: ['.vue', '.js']
@@ -42,12 +40,33 @@ const webpackConfig = {
   }
 }
 
+rimraf(path.join(__dirname, 'dist'), () => console.log('success remove'))
+
 switch (process.env.NODE_ENV) {
+  case 'dev':
+    webpackConfig.entry.app = "./src/index.js"
+    module.exports = webpackConfig
+    break
   case 'prod':
-    rimraf(path.join(__dirname, 'dist'), () => console.log('success remove'))
-    webpackConfig.entry.app = "./src/build.js"
     webpackConfig.devtool = "#source-map"
+    module.exports = [
+      merge(webpackConfig, {
+        entry: './src/components/vue-txt-number.vue',
+        output: {
+          filename: 'vue-txt-number.js',
+          libraryTarget: 'umd',
+          library: 'vue-txt-number',
+          umdNamedDefine: true
+        }
+      }),
+      merge(webpackConfig, {
+        entry: path.resolve('./src/build.js'),
+        output: {
+          filename: 'vue-txt-number.min.js',
+          libraryTarget: 'window',
+          library: 'VueTxtNumber',
+        }
+      })
+    ]
     break
 }
-
-module.exports = webpackConfig
