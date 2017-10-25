@@ -1,7 +1,7 @@
 
-# vue number
+# vue input number
 
->Works for Vue2. This is only can key number component based on vue.js . Currently, It very simple for us.I just need key length and decimal length.That also has disabled negative number.If you also need limit length input component that will be for you.
+>Works for Vue2. This is only can key number component based on vue.js . Currently, It very simple for us.I just need limit for key length and decimal length.That also has disabled negative number.If you also need limit length input component that will be for you.
 
 [Demo](https://kinanson.github.io/#/)
 
