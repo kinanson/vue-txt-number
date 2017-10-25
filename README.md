@@ -1,5 +1,5 @@
 
-# vue-txt-number
+# vue number
 
 >Works for Vue2. This is only can key number component based on vue.js . Currently, It very simple for us.I just need key length and decimal length.That also has disabled negative number.If you also need limit length input component that will be for you.
 
@@ -42,12 +42,12 @@ export default {
 
 ```
 
-###props
+### props
 - key-length:default is'not limit
 - decimal-length:default can't key deciaml and dot
 - allow-negative:default is allow
 
-###events
+### events
 - tab
 - enter
 
