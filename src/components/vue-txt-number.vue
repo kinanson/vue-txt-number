@@ -52,7 +52,9 @@ export default {
       const _checkDelete = () => {
         let deleteIndex = keyCode === 8 ? keyInPosition - 1 : keyInPosition
         const deletePositionNotEqualDotIndex = deleteIndex !== dotIndex
-        if ((keyCode === 8 || keyCode === 46) && (deletePositionNotEqualDotIndex || keyDecimal === 1 || isTextSelectAll)) return true
+        if ((keyCode === 8 || keyCode === 46) &&
+          (deletePositionNotEqualDotIndex || keyDecimal === 1 || isTextSelectAll))
+          return true
       }
       if (_checkDelete()) return true
 
@@ -65,8 +67,9 @@ export default {
       }
       if (_checkDash(e)) return true
       const _checkDecimal = () => {
-        if ((e.keyCode === 190 || e.keyCode === 110) && !isTextSelect && this.decimalLength > 0) {
-          const isSmallThenDecimalLength = (newValue.length - keyInPosition) <= this.decimalLength
+        if ((e.keyCode === 190 || e.keyCode === 110) && !isTextSelect & this.decimalLength > 0) {
+          const isSmallThenDecimalLength =
+            newValue.length - keyInPosition <= this.decimalLength
           if (newValue.length > 0 && dotIndex === -1 && keyInPosition > 0 && isSmallThenDecimalLength) {
             // return true
             if (newValue.indexOf('-') === -1) return true
@@ -91,7 +94,8 @@ export default {
 
       const isNumber = (keyCode > 47 && keyCode < 58) || (keyCode > 95 && keyCode < 106)
       if (isNumber) {
-        if (keyInPosition === newValue.indexOf('-') && !isTextSelect) return e.preventDefault()
+        if (keyInPosition === newValue.indexOf('-') && !isTextSelect)
+          return e.preventDefault()
         if (this.keyLength === 0 && this.decimalLength === 0) return true
         if (isTextSelect) return true
 
@@ -100,7 +104,8 @@ export default {
             return _checkKeyInt()
           } else {
             if (keyInPosition > dotIndex) {
-              if (newValue.substr(dotIndex).length <= this.decimalLength) return true
+              if (newValue.substr(dotIndex).length <= this.decimalLength)
+                return true
             } else {
               return _checkKeyInt()
             }
@@ -164,7 +169,7 @@ export default {
       const dotIndex = target.value.indexOf('.')
       if (dotIndex !== -1) {
         let decimalStr = target.value.split('.')[1]
-        if (this.decimalLength === 0 || decimalStr.length > this.decimalLength) {
+        if (this.decimalLength === 0 || decimalStr.length > this.decimalLengt) {
           this._truncateText(target)
           return
         }
@@ -176,7 +181,7 @@ export default {
       if (this.allowNegative) {
         keyInt = intStr.replace('-', '').length
       }
-      if (keyInt > this.keyLength) {
+      if (keyInt > this.keyLength && this.keyLength > 0) {
         this._truncateText(target)
         return
       }
@@ -184,7 +189,7 @@ export default {
       this.history.push(target.value)
     },
     _truncateText(target) {
-      target.value = _.last(this.history)
+      target.value = this.history[this.history.length - 1]
       target.classList.add('isValidInput')
     }
   }
