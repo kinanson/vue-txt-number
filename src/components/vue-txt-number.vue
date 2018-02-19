@@ -19,25 +19,25 @@ export default {
       default: 0
     }
   },
-  data() {
+  data () {
     return {
       history: [this.value]
     }
   },
   methods: {
-    keyup(e) {
+    keyup (e) {
       this._truncateRuleValidation(e.target)
       this.$emit('input', e.target.value)
       this._emitEvent(e)
     },
-    blur(e) {
+    blur (e) {
       this._truncateRuleValidation(e.target)
       this.$emit('input', e.target.value)
     },
-    focus() {
+    focus () {
       this.$el.select()
     },
-    keydown(e) {
+    keydown (e) {
       const newValue = e.target.value
       const keyCode = e.keyCode
       const isTextSelect = this._getSelection() > 0
@@ -53,8 +53,7 @@ export default {
         let deleteIndex = keyCode === 8 ? keyInPosition - 1 : keyInPosition
         const deletePositionNotEqualDotIndex = deleteIndex !== dotIndex
         if ((keyCode === 8 || keyCode === 46) &&
-          (deletePositionNotEqualDotIndex || keyDecimal === 1 || isTextSelectAll))
-          return true
+          (deletePositionNotEqualDotIndex || keyDecimal === 1 || isTextSelectAll)) { return true }
       }
       if (_checkDelete()) return true
 
@@ -80,7 +79,7 @@ export default {
       if (_checkDecimal()) return true
 
       const _checkKeyInt = () => {
-        //check integer before point
+        // check integer before point
         if (this.keyLength === 0) return true
 
         let keyInt = 0
@@ -94,8 +93,7 @@ export default {
 
       const isNumber = (keyCode > 47 && keyCode < 58) || (keyCode > 95 && keyCode < 106)
       if (isNumber) {
-        if (keyInPosition === newValue.indexOf('-') && !isTextSelect)
-          return e.preventDefault()
+        if (keyInPosition === newValue.indexOf('-') && !isTextSelect) { return e.preventDefault() }
         if (this.keyLength === 0 && this.decimalLength === 0) return true
         if (isTextSelect) return true
 
@@ -104,8 +102,7 @@ export default {
             return _checkKeyInt()
           } else {
             if (keyInPosition > dotIndex) {
-              if (newValue.substr(dotIndex).length <= this.decimalLength)
-                return true
+              if (newValue.substr(dotIndex).length <= this.decimalLength) { return true }
             } else {
               return _checkKeyInt()
             }
@@ -115,7 +112,7 @@ export default {
       }
       e.preventDefault()
     },
-    _emitEvent(e) {
+    _emitEvent (e) {
       switch (e.keyCode) {
         case 9:
           this.$emit('tab')
@@ -125,7 +122,7 @@ export default {
           break
       }
     },
-    _getKeyIndex() {
+    _getKeyIndex () {
       let el = this.$el
       if (el.selectionStart) {
         return el.selectionStart
@@ -143,7 +140,7 @@ export default {
       }
       return 0
     },
-    _getSelection() {
+    _getSelection () {
       let textComponent = this.$el
       let selectedText = ''
       // IE version
@@ -158,7 +155,7 @@ export default {
       }
       return selectedText.length
     },
-    _truncateRuleValidation(target) {
+    _truncateRuleValidation (target) {
       target.classList.remove('isValidInput')
 
       var floatRegex = /^-?(\d+\.)?\d*$/
@@ -188,7 +185,7 @@ export default {
 
       this.history.push(target.value)
     },
-    _truncateText(target) {
+    _truncateText (target) {
       target.value = this.history[this.history.length - 1]
       target.classList.add('isValidInput')
     }
